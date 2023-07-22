@@ -1,4 +1,4 @@
-# See https://gitlab.com/vyoma_systems/common/-/blob/main/LICENSE.vyoma for more details
+ # See https://gitlab.com/vyoma_systems/common/-/blob/main/LICENSE.vyoma for more details
  
 #include "riscv_test.h"
 #include "test_macros.h"
@@ -22,7 +22,8 @@ mtvec_handler:
   csrr t0, mcause
   bne t0, t1, fail
   csrr t0, mepc
-
+  add t0,t0,8
+  csrw mepc,t0
   mret
 
 RVTEST_CODE_END
