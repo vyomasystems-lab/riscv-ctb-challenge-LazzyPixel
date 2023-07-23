@@ -13,7 +13,7 @@ After executing the "make" command, the compilation process failed.
     test.S:179: Error: unrecognized opcode `remuw t5,s4,s9'
     ..
     make: *** [Makefile:11: compile] Error 1
-
+For assembler that is running on RV32I all the DIV and MUL instructions are unkown.
 
 ## Solution:
 In the rv32i.yaml file there is a parameter named  `rel_rv64m`, which produces RV64 M-extension instruction( MUV & DIV instrucion).
