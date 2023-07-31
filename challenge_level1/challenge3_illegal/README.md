@@ -1,6 +1,7 @@
 # Challenge3_illegal 
 
 After executing the "make" command, the compilation process became stuck, and upon analyzing the spike dump, it became evident that the program was trapped in an infinite loop.
+![Alt text](./snapshot/image.png)
 
 ## Observations:
 - The purpose of the "test.S" file is to perform an illegal instruction trap handling test.
@@ -22,3 +23,6 @@ csrw mepc, t0        # Update the MEPC with the new value
 ```
 
 By making these adjustments, proper termination control was ensured in the program.
+
+#### Original vs Updated Test :-
+![Alt text](./snapshot/image-1.png)
