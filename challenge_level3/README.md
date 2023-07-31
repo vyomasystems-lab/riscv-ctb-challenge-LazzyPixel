@@ -28,7 +28,25 @@ To find out bugs i have followed few things
         - for more analysis we can use spike.dump and rtl.dump with dump_conv.py
      
 # Challenge_level3 Coverage
+- ### Bug1
+    This issue while running cov command for riscv_arithmetic_basic_test.
+    ![Alt text](./snapshot/image.png)
 
+    #### Log:
+        2023-07-30 10:49:48,407 riscv_instr_cov_test.py 77 INFO operand = s9,t2,-10
+        2023-07-30 10:49:48,407 riscv_instr_pkg.py 1370 INFO imm: 80000124 -> 2147483940
+        2023-07-30 10:49:48,407 riscv_instr_pkg.py 1370 INFO imm: ff93ab23 -> 4287867683
+        2023-07-30 10:49:48,407 riscv_cov_instr.py 576 ERROR Cannot convert -10 to GPR
 
+My issue is fixed by modifying https://github.com/chipsalliance/riscv-dv/blob/648900d581fba7c1274dc35d8ee7db07404aaec9/pygen/pygen_src/isa/riscv_cov_instr.py#L467-L469
+I believe it should be
+                self.rs1 = self.get_gpr(operands[1])
+                self.rs1_value.set_val(self.get_gpr_state(operands[1]))
+                self.imm.set_val(get_val(operands[2]))
 
-
+- ### Bug2
+    issue while adding --target rv32i
+    ![Alt text](./snapshot/image-1.png)
+    
+    To fix this issue is replaced `+disable_compressed_instr=1`  with `--disable_compressed_instr=1` 
+    https://github.com/chipsalliance/riscv-dv/blob/648900d581fba7c1274dc35d8ee7db07404aaec9/run.py#L336
