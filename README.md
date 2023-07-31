@@ -39,7 +39,9 @@ To find out bugs i have followed few things
         2023-07-30 10:49:48,407 riscv_cov_instr.py 576 ERROR Cannot convert -10 to GPR
 
 My issue is fixed by modifying https://github.com/chipsalliance/riscv-dv/blob/648900d581fba7c1274dc35d8ee7db07404aaec9/pygen/pygen_src/isa/riscv_cov_instr.py#L467-L469
+
 I believe it should be
+
                 self.rs1 = self.get_gpr(operands[1])
                 self.rs1_value.set_val(self.get_gpr_state(operands[1]))
                 self.imm.set_val(get_val(operands[2]))
